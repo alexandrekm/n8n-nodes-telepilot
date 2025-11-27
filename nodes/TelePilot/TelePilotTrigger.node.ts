@@ -83,9 +83,9 @@ export class TelePilotTrigger implements INodeType {
 		debug("trigger.clientSession.authState: " + clientSession.authState)
 		if (clientSession.authState != TelepilotAuthState.WAIT_READY) {
 			await cM.closeLocalSession(credentials?.apiId as number)
-			this.emit([this.helpers.returnJsonArray([{a: "Telegram account not logged in. " +
+			throw new Error("Telegram account not logged in. " +
 				"Please use ChatTrigger node together with loginWithPhoneNumber action. " +
-				"Please check our guide at https://telepilot.co/login-howto"}])])
+				"Please check our guide at https://telepilot.co/login-howto");
 		}
 
 		client = clientSession.client;
